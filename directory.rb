@@ -1,23 +1,31 @@
 #Array storing student names
-def interactive_menu
-loop do
-  students = []
+@students = []
+def print_menu
   puts "1. Input the students"
   puts "2. Show the students"
   puts "9. Exit"
-  selection = gets.chomp
+end
+def show_students
+  print_header
+  print_students_list
+  print_footer
+end
+def process_selection
   case selection
   when 1
-    students = input_students
+    @students = input_students
   when 2
-    print_header
-    print(students)
-    print_footer(students)
+    show_students
   when 9
     eixt
   else
     puts "I dont know what you mean... Try again."
   end
+end
+def interactive_menu
+loop do
+  print_menu
+  process(gets.chomp)
 end
 end
 def input_students
@@ -31,8 +39,8 @@ def input_students
   #Loop while name isnt empty
   while !name.empty? do
     #Adds the student hash to array
-    students << {name: name, cohort: cohort, height: height, dob: dob}
-    puts "Now we have #{students.count} students."
+    @students << {name: name, cohort: cohort, height: height, dob: dob}
+    puts "Now we have #{@students.count} students."
     #Gets next name
     name = gets.chomp
     cohort = gets.chomp
@@ -48,11 +56,11 @@ def print_header
   puts "-------------"
 end
 
-def print(students)
+def print_students_list
   puts "What Letter would you like to lookup"
   letchoice = gets.chomp
   i = 0
-  students.each do |student|
+  @students.each do |student|
     i += 1
   if student[:name].length < 12
     if student[:name].start_with?(letchoice)
@@ -61,7 +69,7 @@ def print(students)
   end
 end
 end
-def print_footer(names)
-puts "Overall, we have #{names.count} great students"
+def print_footer
+puts "Overall, we have #{@students.count} great students"
 end
 interactive_menu
