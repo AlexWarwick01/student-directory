@@ -1,9 +1,28 @@
 #Array storing student names
+def interactive_menu
+loop do
+  students = []
+  puts "1. Input the students"
+  puts "2. Show the students"
+  puts "9. Exit"
+  selection = gets.chomp
+  case selection
+  when 1
+    students = input_students
+  when 2
+    print_header
+    print(students)
+    print_footer(students)
+  when 9
+    eixt
+  else
+    puts "I dont know what you mean... Try again."
+  end
+end
+end
 def input_students
   puts "Please enter the names followed by their cohort of the students"
   puts "To finish, just hit return twice"
-  #Creating an empty array
-  students = []
   #Get first name
   name = gets.chomp
   cohort = gets.chomp
@@ -45,10 +64,4 @@ end
 def print_footer(names)
 puts "Overall, we have #{names.count} great students"
 end
-
-
-
-students = input_students
-print_header
-print(students)
-print_footer(students)
+interactive_menu
