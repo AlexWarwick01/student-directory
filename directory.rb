@@ -13,15 +13,15 @@ def show_students
   print_footer
 end
 
-def process_selection
+def process(selection)
   case selection
-  when 1
+  when "1"
     @students = input_students
-  when 2
+  when "2"
     show_students
-  when 3
+  when "3"
     save_students
-  when 9
+  when "9"
     eixt
   else
     puts "I dont know what you mean... Try again."
@@ -55,7 +55,7 @@ def input_students
     dob = gets.chomp
   end
   #Returns Array
-  students
+  @students
 end
 
 def print_header
