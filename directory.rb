@@ -3,31 +3,38 @@
 def print_menu
   puts "1. Input the students"
   puts "2. Show the students"
+  puts "3. Save the list to students.csv"
   puts "9. Exit"
 end
+
 def show_students
   print_header
   print_students_list
   print_footer
 end
+
 def process_selection
   case selection
   when 1
     @students = input_students
   when 2
     show_students
+  when 3
+    save_students
   when 9
     eixt
   else
     puts "I dont know what you mean... Try again."
   end
 end
+
 def interactive_menu
 loop do
   print_menu
   process(gets.chomp)
 end
 end
+
 def input_students
   puts "Please enter the names followed by their cohort of the students"
   puts "To finish, just hit return twice"
@@ -69,7 +76,18 @@ def print_students_list
   end
 end
 end
+
 def print_footer
 puts "Overall, we have #{@students.count} great students"
+end
+
+def save_students
+  file = File.open("students.csv", "w")
+  @students.each do |student|
+    student_data = [student[:name], student[:cohort], student[:height], student[:dob]]
+    csv_line = student_data.join(",")
+    file.puts csv_line
+  end
+  file.close
 end
 interactive_menu
